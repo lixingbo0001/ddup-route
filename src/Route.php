@@ -8,6 +8,28 @@ use Ddup\Route\Contracts\RouteInterface;
 Class Route
 {
 
+    static public function splitController()
+    {
+        $str = \Route::currentRouteAction();
+
+        $fullController = Str::first($str, '@');
+        $controller     = Str::last($fullController, '\\');
+        $controller     = Str::first($controller, 'Controller');
+        $method         = Str::last($str, '@');
+
+        return [$controller, $method];
+    }
+
+    static public function class()
+    {
+        return self::splitController()[0];
+    }
+
+    static public function method()
+    {
+        return self::splitController()[1];
+    }
+
     static function target($route, $controller)
     {
         if (!is_string($controller)) return $controller;
