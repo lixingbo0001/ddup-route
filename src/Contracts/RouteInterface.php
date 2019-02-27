@@ -13,7 +13,7 @@ interface RouteInterface
 {
     public function where($name, $reg):self;
 
-    public function name($name);
+    public function name($name):self;
 
     public function middleware($key):self;
 }
