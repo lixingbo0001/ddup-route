@@ -104,5 +104,12 @@ Class Route
         self::delete($route . '/{id}', $controllerName . '@delete')->where('id', '\d+')->middleware($middleware);
     }
 
+    static function any($route, $controllerName = null)
+    {
+        return self::match([
+            'get', 'post', 'put', 'delete', 'patch', 'head', 'view', 'copy'
+        ], $route, $controllerName);
+    }
+
 }
 
